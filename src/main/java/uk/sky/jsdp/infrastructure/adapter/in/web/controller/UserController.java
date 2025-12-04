@@ -30,7 +30,7 @@ import uk.sky.jsdp.infrastructure.adapter.in.web.mapper.WebExternalProjectMapper
 import uk.sky.jsdp.infrastructure.adapter.in.web.mapper.WebUserMapper;
 import uk.sky.jsdp.infrastructure.adapter.in.web.request.ExternalProjectRequest;
 import uk.sky.jsdp.infrastructure.adapter.in.web.request.UserRequest;
-import uk.sky.jsdp.infrastructure.adapter.in.web.response.ExternalProjectResponse;
+import uk.sky.jsdp.infrastructure.adapter.in.web.response.UerExternalProjectResponse;
 import uk.sky.jsdp.infrastructure.adapter.in.web.response.UserResponse;
 
 import java.net.URI;
@@ -191,15 +191,15 @@ public class UserController {
                             content = @Content(
                                     mediaType = "application/json",
                                     array = @ArraySchema(
-                                            schema = @Schema(implementation = ExternalProjectResponse.class)
+                                            schema = @Schema(implementation = UerExternalProjectResponse.class)
                                     )
                             )
                     )
             }
     )
     @GetMapping(value = ("/{userId}/external-projects"), produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ExternalProjectResponse>> findAllExternalProjectsFromUser(@PathVariable Long userId) {
-        return ResponseEntity.ok(webExternalProjectMapper.dtoCollectionToResponseList(externalProjectManagement.findAllByUserId(userId)));
+    public ResponseEntity<List<UerExternalProjectResponse>> findAllExternalProjectsFromUser(@PathVariable Long userId) {
+        return ResponseEntity.ok(webExternalProjectMapper.dtoCollectionToUserResponseList(externalProjectManagement.findAllByUserId(userId)));
     }
 
     @Operation(
@@ -219,7 +219,7 @@ public class UserController {
                             },
                             content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = ExternalProjectResponse.class)
+                                    schema = @Schema(implementation = UerExternalProjectResponse.class)
                             )
                     )
             }
@@ -229,8 +229,8 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ApiResponse(responseCode = "201", description = "External project created")
-    public ResponseEntity<ExternalProjectResponse> saveExternalProjectToUser(@PathVariable Long userId, @Valid @RequestBody ExternalProjectRequest externalProjectRequest) {
-        ExternalProjectResponse response = webExternalProjectMapper.dtoToResponse(externalProjectManagement.saveExternalProjectToUser(userId,
+    public ResponseEntity<UerExternalProjectResponse> saveExternalProjectToUser(@PathVariable Long userId, @Valid @RequestBody ExternalProjectRequest externalProjectRequest) {
+        UerExternalProjectResponse response = webExternalProjectMapper.dtoToUserResponse(externalProjectManagement.saveExternalProjectToUser(userId,
                 webExternalProjectMapper.requestToDto(externalProjectRequest)
         ));
 

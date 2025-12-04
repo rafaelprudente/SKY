@@ -9,5 +9,6 @@ import lombok.Setter;
 @Builder
 public class ExternalProjectDto {
     private Long id;
+    private UserDto user;
     private String name;
 }

@@ -7,8 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class ExternalProjectResponse {
+public class UerExternalProjectResponse {
     private Long id;
-    private UserSimpleResponse user;
     private String name;
 }

@@ -432,6 +432,57 @@
 					"response": []
 				},
 				{
+					"name": "Add External Project To User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{$randomUUID}}\",\n    \"name\": \"{{$randomCity}}-{{$randomInt}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/{{lastUserId}}/external-projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{lastUserId}}",
+								"external-projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get User",
 					"event": [
 						{
@@ -508,6 +559,145 @@
 							"path": [
 								"users",
 								"{{lastUserId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EXTERNAL PROJECTS",
+			"item": [
+				{
+					"name": "Get All External Projects",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.collectionVariables.set('lastUserId',responseJson[responseJson.length - 1].id);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/external-projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"external-projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete External Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.collectionVariables.set('lastUserId',responseJson[responseJson.length - 1].id);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/external-projects/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"external-projects",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get External Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    pm.collectionVariables.set('lastUserId',responseJson[responseJson.length - 1].id);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/external-projects/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"external-projects",
+								"7"
 							]
 						}
 					},

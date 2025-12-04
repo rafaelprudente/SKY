@@ -12,7 +12,7 @@ import uk.sky.jsdp.application.port.ExternalProjectManagement;
 import uk.sky.jsdp.application.port.UserManagement;
 import uk.sky.jsdp.infrastructure.adapter.in.web.mapper.WebExternalProjectMapper;
 import uk.sky.jsdp.infrastructure.adapter.in.web.mapper.WebUserMapper;
-import uk.sky.jsdp.infrastructure.adapter.in.web.response.ExternalProjectResponse;
+import uk.sky.jsdp.infrastructure.adapter.in.web.response.UerExternalProjectResponse;
 import uk.sky.jsdp.infrastructure.adapter.in.web.response.UserResponse;
 
 import java.util.List;
@@ -109,7 +109,7 @@ class UserControllerTest {
     void saveExternalProjectToUser() throws Exception {
         when(webUserMapper.requestToDto(any())).thenReturn(UserDto.builder().build());
         when(userManagement.save(any())).thenReturn(UserDto.builder().build());
-        when(webExternalProjectMapper.dtoToResponse(any())).thenReturn(ExternalProjectResponse.builder().build());
+        when(webExternalProjectMapper.dtoToUserResponse(any())).thenReturn(UerExternalProjectResponse.builder().build());
 
         mockMvc.perform(post("/users/1/external-projects")
                         .contentType(MediaType.APPLICATION_JSON)
