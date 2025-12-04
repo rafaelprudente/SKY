@@ -1,0 +1,47 @@
+services:
+  database:
+    image: mariadb:latest
+    container_name: mariadb
+    privileged: true
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - "mariadb_local:/var/lib/mysql"
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+      start_period: 30s
+    networks:
+      - sky-network
+
+  sky-service:
+    image: sky-service:latest
+    build: .
+    container_name: sky-service
+    ports:
+      - "8080:8080"
+    environment:
+      - LOG_LEVEL=INFO
+      - MARIADB_SERVER_URI=database
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8080/actuator/health" ]
+      interval: 2m30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      sky-network:
+
+networks:
+  sky-network:
+
+volumes:
+  mariadb_local:

@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: jsdp
+  datasource:
+    url: jdbc:mariadb://${MARIADB_SERVER_URI}:3306/SKY
+    username: root
+    password: sky
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.MariaDBDialect
+    defer-datasource-initialization: true
+    open-in-view: false
+  sql:
+    init:
+      mode: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "metrics,health,info"
+  endpoint:
+    metrics:
+      enabled: true
+
+springdoc:
+  show-actuator: true
+  packages-to-scan: uk.sky.jsdp
+  api-docs:
+    enabled: true
+    path: /swagger/v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger/swagger-ui.html
+    operationsSorter: method
+    tryItOutEnabled: true
+    filter: true
+    tagsSorter: alpha
+    developer:
+      maintenance:
+        name: Rafael Santos
+        email: rafael.prudente.santos@gmail.com
+  description: ""
+
+logging:
+  level:
+    root: ${LOG_LEVEL:INFO}
+
+app:
+  jwt_expiration: 3600
+  jwt_private_key: classpath:private.pem
+  jwt_public_key: classpath:public.pem
