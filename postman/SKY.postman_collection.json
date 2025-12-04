@@ -11,6 +11,21 @@
 			"item": [
 				{
 					"name": "Actuator",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -30,6 +45,21 @@
 				},
 				{
 					"name": "Actuator Health",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -50,6 +80,21 @@
 				},
 				{
 					"name": "Actuator Metrics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -70,6 +115,21 @@
 				},
 				{
 					"name": "Actuator Metrics (jvm.memory.used)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -154,6 +214,21 @@
 			"item": [
 				{
 					"name": "Add User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", () => {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -181,41 +256,6 @@
 							"port": "8080",
 							"path": [
 								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update User Data",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "    {\n        \"username\": \"{{$randomUserName}}\",\n        \"password\": \"{{$randomPassword}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"name\": \"{{$randomFullName}}\"\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/users/{{lastUserId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"{{lastUserId}}"
 							]
 						}
 					},
@@ -266,6 +306,56 @@
 					"response": []
 				},
 				{
+					"name": "Update User Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"username\": \"{{$randomUserName}}\",\n        \"password\": \"{{$randomPassword}}\",\n        \"email\": \"{{$randomEmail}}\",\n        \"name\": \"{{$randomFullName}}\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/{{lastUserId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{lastUserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get All Users (NO JWT TOKEN)",
 					"event": [
 						{
@@ -301,6 +391,21 @@
 				},
 				{
 					"name": "Get All External Projects From User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -311,7 +416,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/users/1/external-projects",
+							"raw": "http://localhost:8080/users/{{lastUserId}}/external-projects",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -319,7 +424,7 @@
 							"port": "8080",
 							"path": [
 								"users",
-								"1",
+								"{{lastUserId}}",
 								"external-projects"
 							]
 						}
@@ -328,6 +433,21 @@
 				},
 				{
 					"name": "Get User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -338,7 +458,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/users/1",
+							"raw": "http://localhost:8080/users/{{lastUserId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -346,7 +466,7 @@
 							"port": "8080",
 							"path": [
 								"users",
-								"1"
+								"{{lastUserId}}"
 							]
 						}
 					},
@@ -354,6 +474,21 @@
 				},
 				{
 					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", () => {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -364,7 +499,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/users/15",
+							"raw": "http://localhost:8080/users/{{lastUserId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -372,7 +507,7 @@
 							"port": "8080",
 							"path": [
 								"users",
-								"15"
+								"{{lastUserId}}"
 							]
 						}
 					},
@@ -385,6 +520,21 @@
 			"item": [
 				{
 					"name": "API Docs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -406,6 +556,21 @@
 				},
 				{
 					"name": "Swagger UI",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],

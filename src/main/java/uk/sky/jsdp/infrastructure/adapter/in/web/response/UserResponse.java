@@ -1,7 +1,6 @@
 package uk.sky.jsdp.infrastructure.adapter.in.web.response;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

@@ -34,8 +34,8 @@ class ExternalProjectServiceTest {
 
     @Test
     void findAll() {
-        ExternalProjectDto externalProjectDto1 = ExternalProjectDto.builder().id("1").name("name1").build();
-        ExternalProjectDto externalProjectDto2 = ExternalProjectDto.builder().id("2").name("name2").build();
+        ExternalProjectDto externalProjectDto1 = ExternalProjectDto.builder().id(1L).name("name1").build();
+        ExternalProjectDto externalProjectDto2 = ExternalProjectDto.builder().id(2L).name("name2").build();
 
         given(externalProjectPersistence.findAll()).willReturn(List.of(externalProjectDto1, externalProjectDto2));
 
@@ -49,7 +49,7 @@ class ExternalProjectServiceTest {
     void findById() {
         clearInvocations(externalProjectPersistence);
 
-        ExternalProjectDto externalProjectDto = ExternalProjectDto.builder().id("1L").name("external project name").build();
+        ExternalProjectDto externalProjectDto = ExternalProjectDto.builder().id(1L).name("external project name").build();
         given(externalProjectPersistence.existsById(anyString())).willReturn(true);
         given(externalProjectPersistence.findById(anyString())).willReturn(Optional.ofNullable(externalProjectDto));
 
@@ -70,8 +70,8 @@ class ExternalProjectServiceTest {
 
     @Test
     void findAllByUserId() {
-        ExternalProjectDto externalProjectDto1 = ExternalProjectDto.builder().id("1").name("name1").build();
-        ExternalProjectDto externalProjectDto2 = ExternalProjectDto.builder().id("2").name("name2").build();
+        ExternalProjectDto externalProjectDto1 = ExternalProjectDto.builder().id(1L).name("name1").build();
+        ExternalProjectDto externalProjectDto2 = ExternalProjectDto.builder().id(2L).name("name2").build();
 
         given(userPersistence.existsById(1L)).willReturn(true);
         given(externalProjectPersistence.findAllByUserId(anyLong())).willReturn(List.of(externalProjectDto1, externalProjectDto2));
@@ -87,9 +87,9 @@ class ExternalProjectServiceTest {
         clearInvocations(userPersistence);
 
         given(userPersistence.existsById(1L)).willReturn(true);
-        given(externalProjectPersistence.saveExternalProjectToUser(anyLong(), any())).willReturn(ExternalProjectDto.builder().id("1").name("new-project-name").build());
+        given(externalProjectPersistence.saveExternalProjectToUser(anyLong(), any())).willReturn(ExternalProjectDto.builder().id(1L).name("new-project-name").build());
 
-        ExternalProjectDto externalProject = externalProjectService.saveExternalProjectToUser(1L, ExternalProjectDto.builder().id("1").name("new-project-name").build());
+        ExternalProjectDto externalProject = externalProjectService.saveExternalProjectToUser(1L, ExternalProjectDto.builder().id(1L).name("new-project-name").build());
 
         assertThat(externalProject).isNotNull();
         verify(externalProjectPersistence).saveExternalProjectToUser(anyLong(), any());

@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ExternalProjectDto {
-    private String id;
+    private Long id;
     private String name;
 }

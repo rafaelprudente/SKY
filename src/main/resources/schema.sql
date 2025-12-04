@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS tb_user_roles
 
 CREATE TABLE IF NOT EXISTS tb_user_external_project
 (
-    id      VARCHAR(200) PRIMARY KEY,
+    id      BIGINT PRIMARY KEY AUTO_INCREMENT,
     user_id BIGINT       NOT NULL,
     name    VARCHAR(120) NOT NULL,
     CONSTRAINT `Fdfvnlkjiuyfgsdfglig05ktofg` FOREIGN KEY (`user_id`) REFERENCES `tb_users` (`id`)

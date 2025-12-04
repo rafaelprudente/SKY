@@ -14,7 +14,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ExternalProjectRequest {
     @NotBlank
-    private String id;
-    @NotBlank
     private String name;
 }
